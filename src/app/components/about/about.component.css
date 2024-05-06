@@ -1,0 +1,224 @@
+.text-bold {
+    font-weight: 600;
+  }
+  
+  .text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  
+  .text-red {
+    color: #f86a82;
+  }
+  a
+  .bg-red {
+    background-color: #f86a82;
+  }
+  
+  .border-red {
+    border-color: #f86a82;
+  }
+  
+  .btn-red {
+    background-color: #f86a82;
+    border-color: #f86a82;
+    color:#fff
+  }
+  
+  .btn-red:hover {
+    background-color: transparent;
+    border-color: #f86a82; 
+    border-width: 1px;
+    color: #f86a82;
+  }
+  
+  .btn-outline-red {
+    background-color: transparent;
+    border-color: #f86a82; 
+    border-width: 1px;
+    color: #f86a82;
+  }
+  
+  .btn-outline-red:hover {
+    background-color: #f86a82;
+    border-color: #f86a82;
+    color:#fff
+  }
+  
+  .pt-100{
+    padding-top:100px;
+  }
+  .pb-100{
+    padding-bottom:100px;
+  }
+  .section-title {
+    margin-bottom: 60px;
+  }
+  .section-title p {
+    color: #777;
+    font-size: 16px;
+  }
+  .section-title h4 {
+    text-transform: capitalize;
+    font-size: 40px;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .section-title h4:before {
+    position: absolute;
+    content: "";
+    width: 60px;
+    height: 2px;
+    background-color: #f86a82;
+    bottom: 0;
+    left: 50%;
+    margin-left: -30px;
+  }
+  .section-title h4:after {
+    position: absolute;
+    background-color: #f86a82;
+    content: "";
+    width: 10px;
+    height: 10px;
+    bottom: -4px;
+    left: 50%;
+    margin-left: -5px;
+    border-radius: 50%;
+  }
+  ul.timeline-list {
+    position: relative;
+    margin: 0;
+    padding: 0
+  }
+  ul.timeline-list:before {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100%;
+    background-color: #f86a82;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  ul.timeline-list li {
+    position: relative;
+    clear: both;
+    display: table;
+  }
+  .timeline_content {
+    border: 2px solid #f86a82;
+    background-color:#fff
+  }
+  ul.timeline-list li .timeline_content {
+    width: 45%;
+    color: #333;
+    padding: 30px;
+    float: left;
+    text-align: right;
+  }
+  ul.timeline-list li:nth-child(2n) .timeline_content {
+    float: right;
+    text-align: left;
+  }
+  .timeline_content h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  ul.timeline-list li:before {
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-color: #f86a82;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  border-radius: 50%;
+  }
+  .timeline_content span {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: poppins;
+    color: #f86a82;
+  }
+  .prod{background: linear-gradient(to right, #c24138, #f86a82);
+    min-height: 100vh;
+  }
+  
+  .text-gray{color: #aaa}
+  .contact-form {
+    background-image: url('https://img.freepik.com/photos-gratuite/assortiment-plat-pinceaux-palettes-maquillage_23-2148301885.jpg?t=st=1714846354~exp=1714849954~hmac=a79cf75e911c90f2119f891478f9a60c495a8a4571d8196711fb3f9801416794&w=996');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 192, 203, 0.5); /* Couleur rose bébé avec effet transparent */
+    padding: 70px 0; /* Augmentation du padding pour agrandir le formulaire */
+}
+
+.contact-form .container {
+    max-width: 700px; /* Augmentation de la largeur maximale du container */
+    margin: auto;
+}
+
+.contact-form h2 {
+    text-align: center;
+    margin-bottom: 40px; /* Légère augmentation de la marge basse */
+}
+
+.contact-form form {
+    background-color: rgba(255, 255, 255, 0.238); /* Couleur de fond du formulaire avec effet de transparence */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .form-group {
+    margin-bottom: 30px; /* Augmentation de la marge basse entre les groupes de formulaire */
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px; /* Augmentation de la taille du padding */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.contact-form textarea {
+    height: 150px; /* Augmentation de la hauteur de la zone de texte */
+    resize: none;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #ff69b4; /* Couleur rose bébé */
+    color: #fff;
+    border: none;
+    padding: 12px 24px; /* Augmentation de la taille du padding */
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #ff1493; /* Couleur rose bébé plus foncée au survol */
+}
+.btn-submit {
+    display: block;
+    margin: 0 auto; /* Centre le bouton horizontalement */
+    text-align: center; /* Centre le texte du bouton */
+}
+

@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="login.component.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="#" class="signin-form">
+            <h1>Connectez-vous à votre compte</h1>
+            <div class="input-box">
+                <input  placeholder="Email" required  type="email" [(ngModel)]="email">
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input placeholder="Password" type="password"  name="password" [(ngModel)]="password">
+                <i class='bx bxs-lock-alt'></i>
+                
+            </div>
+            <div class="remember-forgot">
+                <a href="/forgot-password">Mot de passe oublié?</a>
+            </div>
+              <button type="submit" class="submit" (click)="login()">connexion</button>
+              <div class="register-link">
+                <p>Vous n'avez pas de compte?<a href="/register" class="mx-2">S'inscrire</a></p>
+              </div>
+              <div class="row mt-2">
+                <a (click)="signInWithGoogle()" style="text-decoration: none;cursor: pointer;">
+                    <div class="card shadow text-center">
+                        <div class="card-body">
+                            <img src="../../../assets/icons8-google-48.png" alt="" height="24px" width="24px"> Sign In with Google
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </form>
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div *ngIf="(cartItems$ | async)?.length === 0" class="alert alert-info text-center p-4" role="alert">
+    <h4 class="alert-heading">Votre panier est vide</h4>
+    <p>Aucun article dans votre panier pour le moment</p>
+  </div>
+  <div *ngIf="(cartItems$ | async)?.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produit</th>
+          <th scope="col">Description</th>
+          <th scope="col">Prix</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems$ | async">
+          <td>{{ item.name }}</td>
+          <td>{{ item.shortDescription }}</td>
+          <td>{{ item.price }} DT</td>
+          <td>
+            <button class="btn btn-danger" (click)="removeFromCart(item.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Total: {{ cartTotal$ | async }} DT</p>
+    <button class="btn btn-warning" (click)="clearCart()">Vider le panier</button>
+  </div>
+  

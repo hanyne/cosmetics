@@ -1,0 +1,58 @@
+/* Navbar */
+.navbar {
+  background-color: #f38db6; /* Background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+}
+
+.navbar-toggler {
+  border: none; /* Remove border */
+  background-color: transparent; /* Transparent background */
+  color: #333; /* Button color */
+}
+
+.nav-link {
+  color: #333; /* Link color */
+}
+
+.nav-link.active {
+  font-weight: bold; /* Bold font for active link */
+}
+
+.dropdown-menu {
+  display: none; /* Initially hide dropdown menu */
+  position: absolute;
+  background-color: #ffffff; /* Dropdown background color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dropdown box shadow */
+  z-index: 1000; /* Ensure dropdown appears above other elements */
+}
+
+.dropdown-menu.show {
+  display: block; /* Show dropdown menu when active */
+}
+
+.dropdown-item {
+  color: #333; /* Dropdown item color */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  border-radius: 25px !important; /* Adjust border-radius as needed */
+}
+
+.input-group button {
+  border-radius: 25px !important; /* Adjust border-radius as needed */
+  background-color: #fa8ed0; /* Change button background color */
+  border-color: #f38cf3; /* Change button border color */
+  color: #fff; /* Change button text color */
+}
+
+.input-group button:hover {
+  background-color: #f38cf3; /* Change button background color on hover */
+  border-color: #f38cf3; /* Change button border color on hover */
+}

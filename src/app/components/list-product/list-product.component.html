@@ -1,0 +1,121 @@
+<!-- Navbar -->
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Beauty Glow</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <button class="nav-link text-white bg-red px-3 rounded">Sign out</button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-red text-white sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column mx-auto" style="width: 90%;">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#">
+                <span data-feather="home" class="align-text-bottom"></span>
+                Tableau de bord
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file" class="align-text-bottom"></span>
+                Messages 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <span data-feather="shopping-cart " class="align-text-bottom"></span>
+                Produits
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="users" class="align-text-bottom"></span>
+                Admins
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main content -->
+      <!-- Main content -->
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Produits</h1>
+  </div>
+
+
+  <div *ngIf="(products$ | async)?.length === 0" class="alert alert-info text-center p-4" role="alert">
+    <h4 class="alert-heading">Vous n'avez pas de produits pour le moment</h4>
+    <p>Vos produits vont apparaître ici</p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-black" scope="col">Nom</th>
+        <th class="text-black" scope="col">Description</th>
+        <th class="text-black" scope="col">Prix</th>
+        <th class="text-black" scope="col">Description Courte</th>
+        <th class="text-black" scope="col">Catégorie</th>
+        <th class="text-black" scope="col">Image</th>
+        <th class="text-black" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products$ | async">
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.shortDescription }}</td>
+          <td>{{ product.category }}</td>
+          <td>
+            <!-- Utilisez la balise <img> pour afficher l'image -->
+            <img [src]="product.image" alt="Product Image" style="max-width: 100px;">
+          </td>
+          <td>
+            <button class="btn btn-danger mx-2" (click)="deleteProduct(product.id)">Supprimer</button>
+            <button class="btn btn-primary" (click)="updateProduct(product)">Mettre à jour</button>
+          </td>
+        </tr>
+      </tbody>
+      
+  </table>
+
+  
+            <!-- Formulaire d'ajout de produit -->
+            <form (submit)="addProduct()" class="text-center">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newProduct.name" name="productName">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Prix" [(ngModel)]="newProduct.price" name="productPrice">              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newProduct.description" name="productDescription">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Description Courte" [(ngModel)]="newProduct.shortDescription" name="productShortDescription">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Catégorie" [(ngModel)]="newProduct.category" name="productCategory">
+              </div>
+              <div class="form-group">
+                <input type="file" class="form-control-file" id="imageInput" [(ngModel)]="newProduct.image" name="productImage">
+              </div>
+              
+            
+              <!-- Centrer les boutons -->
+              <div class="d-flex justify-content-center">
+                <button *ngIf="isAdding" type="submit" class="btn bg-primary">Ajouter Produit</button>
+                <button *ngIf="!isAdding" type="submit" class="btn bg-primary" (click)="saveUpdatedProduct()">Modifier Produit</button>
+              </div>
+            </form>
+            
+

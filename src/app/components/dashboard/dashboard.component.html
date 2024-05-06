@@ -1,0 +1,95 @@
+
+
+<app-navbar></app-navbar>
+<body>
+    <!-- Carousel -->
+    <div  id="carouselExampleSlidesOnly" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.fatales.tn/modules/ps_imageslider/images/6bb8d0163b63b09cd575ac23dd1a70589b1a0808_BANNIERE%20MYWAY%20NACTAR%2002%201920X520.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.fatales.tn/modules/ps_imageslider/images/39a24e031ac13a46bb5fa415f048511e397fb9b7_banner-fatales_MULTI-ACTIVE_2024_StillLife&Model_WW.jpg_master-(1).jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://drest.s3.eu-west-3.amazonaws.com/wp-content/uploads/2024/04/24121334/page-sephora-corection_Banner-Sephora-desktop-copy-scaled.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://drest.s3.eu-west-3.amazonaws.com/wp-content/uploads/2024/05/03110248/act-ewany_destop-copy-scaled.webp" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container mt-5">
+        <!-- Search Bar -->
+        <div class="row justify-content-center mb-5">
+          <div class="col-6">
+              <div class="input-group">
+                  <input type="text" class="form-control py-1" placeholder="Rechercher un Article">
+                  <button class="btn btn-outline-secondary mx-2" type="button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+      
+
+        <!-- Qui sommes nous section -->
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h1 class="mb-3">Qui sommes nous</h1>
+                <p class="text-justify">
+                  Nous sommes une boutique en ligne passionnée par la beauté et dévouée à vous offrir les meilleurs produits de maquillage pour sublimer votre apparence naturelle. Chez BeautyGlow, nous croyons que chaque personne mérite de se sentir confiante et belle dans sa peau, et c'est pourquoi nous nous efforçons de fournir des produits de qualité supérieure qui vous aident à exprimer votre individualité et à rayonner de l'intérieur.
+
+                  Notre équipe est composée de passionnés de la beauté qui sélectionnent soigneusement chaque produit pour sa qualité, sa performance et son potentiel à vous aider à atteindre vos objectifs de beauté. Que vous recherchiez des fonds de teint qui correspondent parfaitement à votre teint, des rouges à lèvres qui complètent votre style ou des palettes de fards à paupières pour créer des looks à couper le souffle, nous avons tout ce qu'il vous faut pour vous aider à exprimer votre beauté unique.                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="https://www.sagacosmetics.com/img/cms/Photo-mag-Nantes---800-x-500px.jpg" class="img-fluid" alt="...">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-4" *ngFor="let product of products">
+                <div class="card">
+                    <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.shortDescription }}</p>
+                        <p class="card-text">{{ product.price }} DT</p>
+                        <button (click)="addToCart(product)">Ajouter au panier</button>                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="text-center text-lg-start text-white" style="background-color: #494747;">
+      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <div class="me-5 d-none d-lg-block">
+              <h5 class="my-auto">Rejoignez-nous sur les réseaux sociaux</h5>
+          </div>
+          <div>
+              <a href="https://www.facebook.com/decodarDD/" class="me-4 text-reset">
+                  <i class="fab fa-facebook fa-lg"></i>
+              </a>
+              <a href="" class="me-4 text-reset">
+                  <i class="fab fa-instagram fa-lg"></i>
+              </a>
+          </div>
+      </section>
+      <section class="">
+          <div class="container text-center text-md-start mt-5">
+              <div class="row mt-3">
+                  <!-- Vos autres sections -->
+              </div>
+          </div>
+      </section>
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © <span id="currentYear"></span> Copyright Deco Dar
+      </div>
+  </footer>
+  
+</body>
