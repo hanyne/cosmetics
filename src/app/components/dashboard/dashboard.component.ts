@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    this.cartService.addToCart(product); // Appel de la fonction addToCart du service CartService
+    console.log("Product added to cart:", product);
+    this.cartService.addToCart(product);
+    console.log("Cart items after addition:", this.cartService.getCartItems());
   }
+  
 }

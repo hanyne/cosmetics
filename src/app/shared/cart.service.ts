@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../model/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems: Product[] = [];
-  private cartItemsSubject = new BehaviorSubject<Product[]>([]);
+  private cartItemsSubject: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  public cartItems$: Observable<Product[]> = this.cartItemsSubject.asObservable();
 
   constructor() { }
 
-  getCartItems(): BehaviorSubject<Product[]> {
-    return this.cartItemsSubject;
-  }
-
   addToCart(product: Product): void {
-    this.cartItems.push(product);
-    this.cartItemsSubject.next(this.cartItems);
+    const currentCartItems = this.cartItemsSubject.getValue();
+    const updatedCartItems = [...currentCartItems, product];
+    this.cartItemsSubject.next(updatedCartItems);
   }
 
-  removeFromCart(productId: string): void {
-    this.cartItems = this.cartItems.filter(item => item.id !== productId);
-    this.cartItemsSubject.next(this.cartItems);
+  removeFromCart(product: Product): void {
+    const currentCartItems = this.cartItemsSubject.getValue();
+    const updatedCartItems = currentCartItems.filter(item => item !== product);
+    this.cartItemsSubject.next(updatedCartItems);
+  }
+
+  getCartItems(): Product[] {
+    return this.cartItemsSubject.getValue();
   }
 
   clearCart(): void {
-    this.cartItems = [];
-    this.cartItemsSubject.next(this.cartItems);
-  }
-
-  calculateTotal(): number {
-    return this.cartItems.reduce((total, item) => total + (item.price || 0), 0);
+    this.cartItemsSubject.next([]);
   }
 }

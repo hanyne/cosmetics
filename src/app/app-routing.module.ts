@@ -18,6 +18,7 @@ import { CartComponent } from './components/cart/cart.component';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch:'full'},
   {path: 'login', component : LoginComponent },
   {path: 'register', component : RegisterComponent },
   {path: 'varify-email', component : VarifyEmailComponent },
