@@ -21,6 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
 import { CartService } from './shared/cart.service';
+import { DetailsProduitComponent } from './components/details-produit/details-produit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { CartService } from './shared/cart.service';
     ContactComponent,
     ListProductComponent,
     CartComponent,
+    DetailsProduitComponent,
   ],
   imports: [
     BrowserModule,

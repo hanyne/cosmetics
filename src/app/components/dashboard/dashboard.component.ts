@@ -11,6 +11,7 @@ import { Product } from 'src/app/model/product';
 export class DashboardComponent implements OnInit {
   isDropdownOpen: boolean = false;
   products: Product[];
+  selectedProduct: Product;
 
   constructor(
     private productService: ProductService,
@@ -30,11 +31,15 @@ export class DashboardComponent implements OnInit {
       this.products = products;
     });
   }
-
-  addToCart(product: Product): void {
-    console.log("Product added to cart:", product);
-    this.cartService.addToCart(product);
-    console.log("Cart items after addition:", this.cartService.getCartItems());
-  }
+addToCart(product: Product) {
+  console.log('Product added to cart:', product);
+  this.cartService.addToCart(product);
+  window.alert('Your product has been added to the cart!');
+}
+showProductDetails(productId: string): void {
+  this.productService.getProductById(productId).subscribe(product => {
+    this.selectedProduct = product;
+  });
+}
   
 }

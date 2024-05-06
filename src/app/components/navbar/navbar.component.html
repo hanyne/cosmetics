@@ -16,10 +16,10 @@
           <!-- Left links -->
           <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                  <a class="nav-link active" aria-current="page" href="/dashboard">Accueil</a>
               </li>
               <li class="nav-item mx-3">
-                  <a class="nav-link" href="#">A Propos</a>
+                  <a class="nav-link" href="/about">A Propos</a>
               </li>
               <!-- Navbar dropdown -->
               <li class="nav-item mx-2" (mouseenter)="isDropdownOpen = true" (mouseleave)="isDropdownOpen = false">
@@ -34,12 +34,12 @@
                   </ul>
               </li>
               <li class="nav-item mx-3">
-                  <a class="nav-link disabled">contact</a>
-              </li>
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
               <li class="nav-item">
-                <a href="/Cart" class="nav-link text-decoration-none text-bold">
+                <a href="/cart" class="nav-link text-decoration-none text-bold">
                   <i class="fas fa-shopping-cart mx-2"></i>
-                    <span class="badge rounded-pill bg-light text-black">0</span>
+                    <span class="badge rounded-pill bg-light text-black">{{ cartItems.length }}</span>
                 </a>
             </li>
             

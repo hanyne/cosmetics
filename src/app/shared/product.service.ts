@@ -41,4 +41,8 @@ export class ProductService {
       switchMap(() => fileRef.getDownloadURL())
     );
   }
+   // Method to get product details by ID
+   getProductById(productId: string): Observable<Product> {
+    return this.productsCollection.doc<Product>(productId).valueChanges();
+  }
 }

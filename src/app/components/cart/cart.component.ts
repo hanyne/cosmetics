@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/shared/cart.service';
-import { Product } from 'src/app/model/product';
+import { CartItem } from 'src/app/model/cart-item';
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +8,7 @@ import { Product } from 'src/app/model/product';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: Product[] = [];
+  cartItems: CartItem[] = [];
 
   constructor(private cartService: CartService) { }
 
@@ -18,11 +18,29 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeFromCart(product: Product): void {
-    this.cartService.removeFromCart(product);
+  removeFromCart(cartItem: CartItem): void {
+    this.cartService.removeFromCart(cartItem);
+  }
+
+  increaseQuantity(cartItem: CartItem): void {
+    cartItem.quantity++;
+    this.cartService.updateCartItem(cartItem);
+  }
+
+  decreaseQuantity(cartItem: CartItem): void {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
+      this.cartService.updateCartItem(cartItem);
+    }
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.price, 0);
+    return this.cartItems.reduce((total, item) => {
+      if (item.product) {
+        return total + (item.product.price * item.quantity);
+      } else {
+        return total;
+      }
+    }, 0);
   }
 }

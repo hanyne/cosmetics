@@ -48,27 +48,49 @@
                 <img src="https://www.sagacosmetics.com/img/cms/Photo-mag-Nantes---800-x-500px.jpg" class="img-fluid" alt="...">
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 mb-4" *ngFor="let product of products">
-                <div class="card">
-                    <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.shortDescription }}</p>
-                        <p class="card-text">{{ product.price }} DT</p>
-                        <button (click)="addToCart(product)" class="btn btn-primary" type="submit">Ajouter au panier</button>
-                    </div>
-                </div>
-            </div>
+       <!-- dashboard.component.html -->
+<!-- dashboard.component.html -->
+<div class="container">
+    <div class="row">
+      <div class="col text-center mb-4">
+        <div class="title-line"></div>
+        <h2 class="title">Certains de nos produits</h2>
+        <div class="title-line"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let product of products">
+        <div class="product-grid">
+          <div class="product-image">
+            <a href="#" class="image">
+              <img class="pic-1" [src]="product.image">
+              <img class="pic-2" [src]="product.image">
+            </a>
+            <a href="" class="product-like-icon"><i class="far fa-heart"></i></a>
+            <ul class="product-links">
+              <li><a href="#"><i class="far fa-heart"></i></a></li>
+              <li><a href="#"><i class="fa fa-random"></i></a></li>
+              <li><a [routerLink]="['/product-detail', product.id]"><i class="fa fa-eye"></i></a></li>
+              <li><a href="/dashboard" (click)="addToCart(product)"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{ product.name }}</a></h3>
+            <div class="price">{{ product.price }} DT</div>
+          </div>
         </div>
-        
+      </div>
+    </div>
+  </div>
+  
+  
 
 
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <footer class="text-center text-lg-start text-white" style="background-color: #494747;">
+    <footer class="text-center text-lg-start text-white mt-5" style="background-color: #494747;">
       <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div class="me-5 d-none d-lg-block">
               <h5 class="my-auto">Rejoignez-nous sur les réseaux sociaux</h5>
