@@ -21,18 +21,39 @@
               <li class="nav-item mx-3">
                   <a class="nav-link" href="/about">A Propos</a>
               </li>
+              
               <!-- Navbar dropdown -->
-              <li class="nav-item mx-2" (mouseenter)="isDropdownOpen = true" (mouseleave)="isDropdownOpen = false">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
-                      Produits
-                  </a>
-                  <!-- Dropdown menu -->
-                  <ul class="dropdown-menu" [class.show]="isDropdownOpen">
-                      <li><a class="dropdown-item" href="#">Item 1</a></li>
-                      <li><a class="dropdown-item" href="#">Item 2</a></li>
-                      <li><a class="dropdown-item" href="#">Item 3</a></li>
-                  </ul>
+              <li class="nav-item mx-2" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
+                <a class="nav-link dropdown-toggle" href="/product" id="navbarDropdown" role="button" aria-expanded="false">
+                  Produits
+                </a>
+                <!-- Dropdown menu -->
+               <!-- Dropdown menu -->
+<ul class="dropdown-menu" [class.show]="isDropdownOpen">
+  <li *ngFor="let category of categories">
+    <a class="dropdown-item" (mouseenter)="getSubcategories(category)"(click)="navigateToCategory(category)">
+      {{ category }}
+    </a>
+    <ul *ngIf="category === activeCategory">
+      <li *ngFor="let subcategory of subcategories">
+        <a class="dropdown-item" (mouseenter)="getSubSubcategories(subcategory)" (click)="navigateToSubcategory(category, subcategory)">
+          {{ subcategory }}
+        </a>
+        <ul *ngIf="subcategory === activeSubcategory">
+          <li *ngFor="let subSubcategory of subSubcategories">
+            <a class="dropdown-item" (click)="navigateToSubSubcategory(category, subcategory, subSubcategory)">
+              {{ subSubcategory }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
               </li>
+              
+              
               <li class="nav-item mx-3">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>

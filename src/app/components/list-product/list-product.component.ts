@@ -10,7 +10,7 @@ import { Product } from '../../model/product';
 })
 export class ListProductComponent implements OnInit {
   products$: Observable<Product[]>;
-  newProduct: Product = { name: '', description: '', shortDescription: '', image: '', category: '', price: 0 }; // Ajout de l'attribut price
+  newProduct: Product = { name: '', description: '', shortDescription: '', image: '', category: { main: '', subcategory: '', subSubcategory: '' }, price: 0 };
   selectedProduct: Product;
   isAdding: boolean = true;
 
@@ -29,10 +29,10 @@ export class ListProductComponent implements OnInit {
       const imageFile = (document.getElementById('imageInput') as HTMLInputElement).files[0];
       const imageUrl = await this.productService.uploadImage(imageFile).toPromise();
       
-      this.newProduct.image = imageUrl; // Mettre à jour l'URL de l'image
+      this.newProduct.image = imageUrl;
 
       await this.productService.addProduct(this.newProduct);
-      this.newProduct = { name: '', description: '', shortDescription: '', image: '', category: '', price: 0 }; // Réinitialiser le nouveau produit avec le prix à 0
+      this.newProduct = { name: '', description: '', shortDescription: '', image: '', category: { main: '', subcategory: '', subSubcategory: '' }, price: 0 };
       console.log('Produit ajouté avec succès');
     } catch (error) {
       console.error('Erreur lors de l\'ajout du produit :', error);
@@ -60,28 +60,27 @@ export class ListProductComponent implements OnInit {
         let updatedProduct: Product;
         
         if (this.newProduct.image === '') {
-          // Si aucune nouvelle image n'est fournie, utiliser l'image actuelle
           updatedProduct = { ...this.selectedProduct, ...this.newProduct, image: this.selectedProduct.image };
         } else {
-          // Si une nouvelle image est fournie, la mettre à jour
           const imageFile = (document.getElementById('imageInput') as HTMLInputElement).files[0];
           const imageUrl = await this.productService.uploadImage(imageFile).toPromise();
           updatedProduct = { ...this.selectedProduct, ...this.newProduct, image: imageUrl };
         }
-
+  
         await this.productService.updateProduct(updatedProduct);
         console.log('Produit mis à jour avec succès');
       } else {
-        console.log('Aucun produit sélectionné pour la mise à jour.');
+        await this.addProduct(); // Ajoutez cette ligne pour appeler la méthode addProduct() lorsque vous ajoutez un nouveau produit
+        console.log('Produit ajouté avec succès');
       }
-
-      // Réinitialiser le formulaire et la sélection du produit
-      this.newProduct = { name: '', description: '', shortDescription: '', image: '', category: '', price: 0 }; // Réinitialiser le nouveau produit avec le prix à 0
+  
+      this.newProduct = { name: '', description: '', shortDescription: '', image: '', category: { main: '', subcategory: '', subSubcategory: '' }, price: 0 };
       this.selectedProduct = null;
-      this.isAdding = true; // Réinitialiser isAdding à true après l'ajout ou la modification
+      this.isAdding = true;
     } catch (error) {
-      console.error('Erreur lors de la mise à jour du produit :', error);
+      console.error('Erreur lors de la mise à jour ou de l\'ajout du produit :', error);
     }
   }
+  
 
 }

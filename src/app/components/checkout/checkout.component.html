@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container text-center">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h2 class="my-5">Validation de la commande</h2>
+      <!-- Formulaire pour les détails du client -->
+      <form (submit)="checkout()" class="checkout-form">
+        <div class="form-group row">
+          <label for="firstName" class="col-sm-4 col-form-label"><i class="fas fa-user"></i> Prénom</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="customerDetails.firstName" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lastName" class="col-sm-4 col-form-label"><i class="fas fa-user"></i> Nom</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="customerDetails.lastName" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="address" class="col-sm-4 col-form-label"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+          <div class="col-sm-8">
+            <textarea class="form-control" id="address" name="address" [(ngModel)]="customerDetails.address" required></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phoneNumber" class="col-sm-4 col-form-label"><i class="fas fa-phone"></i> Numéro de téléphone</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control my-3" id="phoneNumber" name="phoneNumber" [(ngModel)]="customerDetails.phoneNumber" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-4 col-form-label"><i class="fas fa-envelope"></i> Adresse email</label>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="customerDetails.email" required>
+          </div>
+        </div>
+        <!-- Prix total sans frais de livraison -->
+        <div class="total-price">
+          <p>Prix total (hors livraison) : {{ getTotalPrice() }} DT</p>
+        </div>
+        <!-- Prix total avec frais de livraison -->
+        <div class="total-price">
+          <p>Prix total (avec livraison) : {{ getTotalPrice() + 7 }} DT</p>
+          <p class="delivery-info"><i class="fas fa-truck"></i> Frais de livraison : 7 DT (Livraison à domicile dans toute la Tunisie)</p>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Valider la commande</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

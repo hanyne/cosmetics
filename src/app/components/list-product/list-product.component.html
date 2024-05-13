@@ -54,68 +54,66 @@
 
 
   <div *ngIf="(products$ | async)?.length === 0" class="alert alert-info text-center p-4" role="alert">
-    <h4 class="alert-heading">Vous n'avez pas de produits pour le moment</h4>
-    <p>Vos produits vont apparaître ici</p>
+  <h4 class="alert-heading">Vous n'avez pas de produits pour le moment</h4>
+  <p>Vos produits vont apparaître ici</p>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-black" scope="col">Nom</th>
+      <th class="text-black" scope="col">Description</th>
+      <th class="text-black" scope="col">Prix</th>
+      <th class="text-black" scope="col">Description Courte</th>
+      <th class="text-black" scope="col">Catégorie</th>
+      <th class="text-black" scope="col">Image</th>
+      <th class="text-black" scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products$ | async">
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.shortDescription }}</td>
+      <td>{{ product.category.main }} > {{ product.category.subcategory }} > {{ product.category.subSubcategory }}</td>
+      <td>
+        <img [src]="product.image" alt="Product Image" style="max-width: 100px;">
+      </td>
+      <td>
+        <button class="btn btn-danger mx-2" (click)="deleteProduct(product.id)">Supprimer</button>
+        <button class="btn btn-primary" (click)="updateProduct(product)">Mettre à jour</button>
+      </td>
+    </tr>
+  </tbody>  
+</table>
+
+<form (submit)="addProduct()" class="text-center">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newProduct.name" name="productName">
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="text-black" scope="col">Nom</th>
-        <th class="text-black" scope="col">Description</th>
-        <th class="text-black" scope="col">Prix</th>
-        <th class="text-black" scope="col">Description Courte</th>
-        <th class="text-black" scope="col">Catégorie</th>
-        <th class="text-black" scope="col">Image</th>
-        <th class="text-black" scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products$ | async">
-          <td>{{ product.name }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.shortDescription }}</td>
-          <td>{{ product.category }}</td>
-          <td>
-            <!-- Utilisez la balise <img> pour afficher l'image -->
-            <img [src]="product.image" alt="Product Image" style="max-width: 100px;">
-          </td>
-          <td>
-            <button class="btn btn-danger mx-2" (click)="deleteProduct(product.id)">Supprimer</button>
-            <button class="btn btn-primary" (click)="updateProduct(product)">Mettre à jour</button>
-          </td>
-        </tr>
-      </tbody>
-      
-  </table>
-
-  
-            <!-- Formulaire d'ajout de produit -->
-            <form (submit)="addProduct()" class="text-center">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newProduct.name" name="productName">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Prix" [(ngModel)]="newProduct.price" name="productPrice">              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newProduct.description" name="productDescription">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Description Courte" [(ngModel)]="newProduct.shortDescription" name="productShortDescription">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Catégorie" [(ngModel)]="newProduct.category" name="productCategory">
-              </div>
-              <div class="form-group">
-                <input type="file" class="form-control-file" id="imageInput" [(ngModel)]="newProduct.image" name="productImage">
-              </div>
-              
-            
-              <!-- Centrer les boutons -->
-              <div class="d-flex justify-content-center">
-                <button *ngIf="isAdding" type="submit" class="btn bg-primary">Ajouter Produit</button>
-                <button *ngIf="!isAdding" type="submit" class="btn bg-primary" (click)="saveUpdatedProduct()">Modifier Produit</button>
-              </div>
-            </form>
-            
-
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Prix" [(ngModel)]="newProduct.price" name="productPrice">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newProduct.description" name="productDescription">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Description Courte" [(ngModel)]="newProduct.shortDescription" name="productShortDescription">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Catégorie Principale" [(ngModel)]="newProduct.category.main" name="productCategoryMain">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Sous-catégorie" [(ngModel)]="newProduct.category.subcategory" name="productSubcategory">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Sous-sous-catégorie" [(ngModel)]="newProduct.category.subSubcategory" name="productSubSubcategory">
+  </div>
+  <div class="form-group">
+    <input type="file" class="form-control-file" id="imageInput" [(ngModel)]="newProduct.image" name="productImage">
+  </div>
+  <div class="d-flex justify-content-center">
+    <button *ngIf="isAdding" type="submit" class="btn bg-primary">Ajouter Produit</button>
+    <button *ngIf="!isAdding" type="submit" class="btn bg-primary" (click)="saveUpdatedProduct()">Modifier Produit</button>
+  </div>
+</form>

@@ -22,6 +22,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
 import { CartService } from './shared/cart.service';
 import { DetailsProduitComponent } from './components/details-produit/details-produit.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DashAdminComponent } from './components/dash-admin/dash-admin.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderService } from './shared/order.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +42,11 @@ import { DetailsProduitComponent } from './components/details-produit/details-pr
     ListProductComponent,
     CartComponent,
     DetailsProduitComponent,
+    ProductPageComponent,
+    CategoryProductsComponent,
+    FooterComponent,
+    DashAdminComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +60,7 @@ import { DetailsProduitComponent } from './components/details-produit/details-pr
     HttpClientModule
     
   ],
-  providers: [CartService],
+  providers: [CartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

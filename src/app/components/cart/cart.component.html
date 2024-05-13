@@ -1,6 +1,26 @@
 <!-- cart.component.html -->
 <app-navbar></app-navbar>
-<section class="vh-100" style="background-image: url('https://img.freepik.com/vecteurs-libre/peint-main-aquarelle-abstrait-aquarelle_23-2149008794.jpg?t=st=1715029639~exp=1715033239~hmac=8f935f8f93befaf54937f976b02e223634615328eb0ad87e132efc93f0f252b1&w=996'); background-size: cover; background-position: center;">  <div class="container h-100">
+<div *ngIf="cartItems.length === 0">
+  <div class="row my-5">
+  
+   <div class="col-md-12 my-5">
+
+     </div>
+     <div class="card-body cart">
+      <div class="col-sm-12 empty-cart-cls text-center">
+        <img src="../../../assets/images/ajouter-au-panier.png" width="300" height="300" class="img-fluid mb-4 mr-3">
+        <h3><strong>Votre panier est vide</strong></h3>
+        <a href="/product" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Continuer les achats</a>
+      </div>
+    </div>
+    
+ </div>
+     
+   
+   </div>
+  
+
+<section class="vh-100" style="background-image: url('https://img.freepik.com/vecteurs-libre/peint-main-aquarelle-abstrait-aquarelle_23-2149008794.jpg?t=st=1715029639~exp=1715033239~hmac=8f935f8f93befaf54937f976b02e223634615328eb0ad87e132efc93f0f252b1&w=996'); background-size: cover; background-position: center;" *ngIf="cartItems.length !== 0">  <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <p><span class="h2">Shopping Cart </span><span class="h4">({{ cartItems.length }} items in your cart)</span></p>
@@ -65,13 +85,19 @@
         </div>
 
         
+
+        
         <div class="d-flex justify-content-end">
           <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg me-2 btn-pink">Continue shopping</button>
-          <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-pink">Add to cart</button>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary btn-lg btn-pink" (click)="goToCheckout()">Confirmer commande</button>
+          </div>
         </div>
 
 
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </section>
+

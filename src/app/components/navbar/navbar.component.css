@@ -8,6 +8,7 @@
     border: none; /* Remove border */
     background-color: transparent; /* Transparent background */
     color: #333; /* Button color */
+
   }
   
   .nav-link {
@@ -17,6 +18,7 @@
   .nav-link.active {
     font-weight: bold; /* Bold font for active link */
   }
+  
   
   .dropdown-menu {
     display: none; /* Initially hide dropdown menu */

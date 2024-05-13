@@ -4,6 +4,10 @@ export interface Product {
   description: string;
   shortDescription: string;
   image: string;
-  category: string;
-  price: number; // Ajout de l'attribut price
+  category: {
+    main: string; // Catégorie principale
+    subcategory?: string; // Sous-catégorie
+    subSubcategory?: string; // Sous-sous-catégorie
+  };
+  price: number;
 }
