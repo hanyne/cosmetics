@@ -18,28 +18,24 @@
         <div class="position-sticky pt-3">
           <ul class="nav flex-column mx-auto" style="width: 90%;">
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="#">
-                <span data-feather="home" class="align-text-bottom"></span>
+              <a class="nav-link " aria-current="page" href="admin/dash">
+                <span data-feather="admin/dash" class="align-text-bottom"></span>
                 Tableau de bord
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="list-message">
                 <span data-feather="file" class="align-text-bottom"></span>
                 Messages 
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
+            <li class="nav-item ">
+              <a class="nav-link active " href="admin/product">
                 <span data-feather="shopping-cart " class="align-text-bottom"></span>
                 Produits
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users" class="align-text-bottom"></span>
-                Admins
-              </a>
             </li>
           </ul>
         </div>
@@ -89,28 +85,40 @@
 
 <form (submit)="addProduct()" class="text-center">
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newProduct.name" name="productName">
+    <input type="text" class="form-control  text-black" placeholder="Nom" [(ngModel)]="newProduct.name" name="productName">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Prix" [(ngModel)]="newProduct.price" name="productPrice">
+    <input type="text" class="form-control text-black" placeholder="Prix" [(ngModel)]="newProduct.price" name="productPrice">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newProduct.description" name="productDescription">
+    <input type="text" class="form-control text-black" placeholder="Description" [(ngModel)]="newProduct.description" name="productDescription">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Description Courte" [(ngModel)]="newProduct.shortDescription" name="productShortDescription">
+    <input type="text" class="form-control text-black" placeholder="Description Courte" [(ngModel)]="newProduct.shortDescription" name="productShortDescription">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Catégorie Principale" [(ngModel)]="newProduct.category.main" name="productCategoryMain">
+    <select class="form-control text-black" [(ngModel)]="newProduct.category.main" name="productCategoryMain" (change)="loadSubcategories(newProduct.category.main)">
+      <option *ngFor="let category of categories$ | async" [value]="category">{{ category }}</option>
+      <option value="">Nouvelle catégorie</option>
+    </select>
+    <input *ngIf="newProduct.category.main === ''" type="text" class="form-control text-black" placeholder="Nouvelle Catégorie" [(ngModel)]="newProduct.category.main" name="newCategoryMain">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Sous-catégorie" [(ngModel)]="newProduct.category.subcategory" name="productSubcategory">
+    <select class="form-control text-black" [(ngModel)]="newProduct.category.subcategory" name="productSubcategory" (change)="loadSubSubcategories(newProduct.category.main, newProduct.category.subcategory)">
+      <option *ngFor="let subcategory of subcategories$ | async" [value]="subcategory">{{ subcategory }}</option>
+      <option value="">Nouvelle sous-catégorie</option>
+    </select>
+    <input *ngIf="newProduct.category.subcategory === ''" type="text" class="form-control text-black" placeholder="Nouvelle Sous-catégorie" [(ngModel)]="newProduct.category.subcategory" name="newSubcategory">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Sous-sous-catégorie" [(ngModel)]="newProduct.category.subSubcategory" name="productSubSubcategory">
+    <select class="form-control text-black" [(ngModel)]="newProduct.category.subSubcategory" name="productSubSubcategory">
+      <option *ngFor="let subSubcategory of subSubcategories$ | async" [value]="subSubcategory">{{ subSubcategory }}</option>
+      <option value="">Nouvelle sous-sous-catégorie</option>
+    </select>
+    <input *ngIf="newProduct.category.subSubcategory === ''" type="text" class="form-control text-black" placeholder="Nouvelle Sous-sous-catégorie" [(ngModel)]="newProduct.category.subSubcategory" name="newSubSubcategory">
   </div>
   <div class="form-group">
-    <input type="file" class="form-control-file" id="imageInput" [(ngModel)]="newProduct.image" name="productImage">
+    <input type="file" class="form-control-file text-black" id="imageInput" [(ngModel)]="newProduct.image" name="productImage">
   </div>
   <div class="d-flex justify-content-center">
     <button *ngIf="isAdding" type="submit" class="btn bg-primary">Ajouter Produit</button>

@@ -46,12 +46,6 @@ export class ProductService {
     return this.productsCollection.doc<Product>(productId).valueChanges();
   }
 
-  getDistinctCategories(): Observable<string[]> {
-    return this.firestore.collection<Product>('products').valueChanges().pipe(
-      map(products => products.map(product => product.category.main)),
-      map(categories => Array.from(new Set(categories)))
-    );
-  }
 
   getProductsByCategory(category: string): Observable<Product[]> {
     return this.firestore.collection<Product>('products', ref => ref.where('category.main', '==', category))
@@ -73,6 +67,13 @@ export class ProductService {
   }
 
 
+  getDistinctCategories(): Observable<string[]> {
+    return this.firestore.collection<Product>('products').valueChanges().pipe(
+      map(products => products.map(product => product.category.main)),
+      map(categories => Array.from(new Set(categories)))
+    );
+  }
+  
   getDistinctSubcategories(category: string): Observable<string[]> {
     return this.firestore.collection<Product>('products', ref => 
       ref.where('category.main', '==', category))
@@ -92,4 +93,5 @@ export class ProductService {
         map(subSubcategories => Array.from(new Set(subSubcategories)))
       );
   }
+  
 }

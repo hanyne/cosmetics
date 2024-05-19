@@ -28,6 +28,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashAdminComponent } from './components/dash-admin/dash-admin.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderService } from './shared/order.service';
+import { MatPaginatorModule } from '@angular/material/paginator'; // Ajoutez cette ligne
+import { MatTableModule } from '@angular/material/table'; 
+import { ListMessageComponent } from './components/list-message/list-message.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +51,8 @@ import { OrderService } from './shared/order.service';
     FooterComponent,
     DashAdminComponent,
     CheckoutComponent,
+    ListMessageComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,8 @@ import { OrderService } from './shared/order.service';
     MatIconModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule,
     
   ],
   providers: [CartService, OrderService],

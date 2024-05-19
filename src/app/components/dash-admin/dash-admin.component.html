@@ -17,28 +17,24 @@
         <div class="position-sticky pt-3">
           <ul class="nav flex-column mx-auto" style="width: 90%;">
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="#">
-                <span data-feather="home" class="align-text-bottom"></span>
+              <a class="nav-link active" aria-current="page" href="admin/dash">
+                <span data-feather="admin/dash" class="align-text-bottom"></span>
                 Tableau de bord
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="list-message">
                 <span data-feather="file" class="align-text-bottom"></span>
                 Messages 
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              <a class="nav-link " href="admin/product">
                 <span data-feather="shopping-cart " class="align-text-bottom"></span>
                 Produits
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users" class="align-text-bottom"></span>
-                Admins
-              </a>
             </li>
           </ul>
         </div>
@@ -50,3 +46,73 @@
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">les commandes </h1>
   </div>
+  <section class="pcoded-main-container">
+    <div class="pcoded-content">
+      <div class="page-header container">
+        <div class="page-block">
+          <div class="row align-items-center">
+            
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-xl-12">
+        <div class=" p-3 my-3 border cont">
+          <div class="form-group mb-4">
+            <div class="card-header col-lg-12">
+              <h1 class="text-center text">Liste des Commandes</h1>
+            </div>
+            <input id="exampleFormControlInput2" type="text" placeholder="Chercher...?" class="form-control form-control-underlined">
+          </div>
+          <br>
+  
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover text-center">
+              <thead class="bg contour border text-bold">
+                <tr>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>Adresse</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders">
+                  <td>{{ order.customer.firstName }} {{ order.customer.lastName }}</td>
+                  <td>
+                    <a [href]="'mailto:' + order.customer.email">{{ order.customer.email }}</a>
+                  </td>
+                  <td>{{ order.customer.phoneNumber }}</td>
+                  <td>{{ order.customer.address }}</td>
+                  <td>{{ order.total }} TND</td>
+                  <td>{{ order.processed ? 'Traité' : 'Non traité' }}</td>
+                  <td>
+                    <ng-container *ngIf="!order.processed">
+                      <button (click)="markAsProcessed(order.id)" class="btn btn-danger-custom btn-sm btn-rounded">
+                        <i class="fas fa-undo-alt"></i>
+                      </button>
+                    </ng-container>
+                    <ng-container *ngIf="order.processed">
+                      <button (click)="markAsUnprocessed(order.id)" class="btn btn-success-custom btn-sm btn-rounded">
+                        <i class="fas fa-check-circle"></i>
+                      </button>
+                    </ng-container>
+                    <button (click)="viewOrderDetails(order.id)" class="btn btn-info-custom btn-sm btn-rounded mx-2" title="Voir Détails">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button (click)="deleteOrder(order.id)" class="btn btn-danger btn-sm btn-rounded mx-2" title="Supprimer">
+                      <i class="fa fa-trash icon"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

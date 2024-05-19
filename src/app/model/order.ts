@@ -1,6 +1,7 @@
 import { CartItem } from './cart-item';
 
 export interface Order {
+  id?: string; // optionnel car il sera ajouté par Firebase
   customer: {
     firstName: string;
     lastName: string;
@@ -12,4 +13,5 @@ export interface Order {
   items: CartItem[];
   deliveryCharge: number;
   total: number;
+  processed?: boolean; // Nouveau champ pour suivre l'état de traitement
 }

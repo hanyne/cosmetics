@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private router: Router
+    
   ) {}
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe(items => {
@@ -57,6 +58,9 @@ export class CartComponent implements OnInit {
   }
   goToCheckout(): void {
     this.router.navigate(['/checkout']);
+  }
+  goToProducts() {
+    this.router.navigate(['/product']);
   }
 
 }

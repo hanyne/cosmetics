@@ -1,0 +1,25 @@
+.responsive-image {
+    margin-top: 50px;
+    max-width: 50%;
+    height: auto;
+}
+.custom-btn {
+    background-color: #ff69b4; /* couleur de fond rose */
+    color: #fff; /* couleur du texte en blanc */
+    border: none; /* supprimer la bordure */
+    padding: 10px 20px; /* espacement interne */
+    font-size: 18px; /* taille de la police */
+    border-radius: 5px; /* coins arrondis */
+    transition: background-color 0.3s, transform 0.3s; /* transition pour les effets */
+  }
+  
+  .custom-btn:hover {
+    background-color: #ff1493; /* couleur de fond plus foncée au survol */
+    transform: scale(1.05); /* légère mise à l'échelle au survol */
+  }
+  
+  .custom-btn:active {
+    background-color: #c71585; /* couleur de fond encore plus foncée lors du clic */
+    transform: scale(1); /* retour à la taille normale lors du clic */
+  }
+  

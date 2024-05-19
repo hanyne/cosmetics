@@ -15,6 +15,9 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { CategoryProductsComponent } from './components/category-products/category-products.component';
 import { DashAdminComponent } from './components/dash-admin/dash-admin.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ListMessageComponent } from './components/list-message/list-message.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+
 
 
 
@@ -45,6 +48,9 @@ const routes: Routes = [
   { path: 'category/:category/:subcategory/:subsubcategory', component: CategoryProductsComponent },
   { path: 'admin/dash', component: DashAdminComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'list-message', component: ListMessageComponent },
+  { path: 'admin/order-details/:id', component: OrderDetailsComponent },
+
 
 
 

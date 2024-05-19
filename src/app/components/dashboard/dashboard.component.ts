@@ -34,7 +34,8 @@ export class DashboardComponent implements OnInit {
 addToCart(product: Product) {
   console.log('Product added to cart:', product);
   this.cartService.addToCart(product);
-  window.alert('Your product has been added to the cart!');
+  window.alert('Votre produit a été ajouté au panier !');
+
 }
 showProductDetails(productId: string): void {
   this.productService.getProductById(productId).subscribe(product => {

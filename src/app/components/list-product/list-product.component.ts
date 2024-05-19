@@ -13,11 +13,15 @@ export class ListProductComponent implements OnInit {
   newProduct: Product = { name: '', description: '', shortDescription: '', image: '', category: { main: '', subcategory: '', subSubcategory: '' }, price: 0 };
   selectedProduct: Product;
   isAdding: boolean = true;
+  categories$: Observable<string[]>;
+  subcategories$: Observable<string[]>;
+  subSubcategories$: Observable<string[]>;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.categories$ = this.productService.getDistinctCategories();
   }
 
   getProducts(): void {
@@ -28,7 +32,6 @@ export class ListProductComponent implements OnInit {
     try {
       const imageFile = (document.getElementById('imageInput') as HTMLInputElement).files[0];
       const imageUrl = await this.productService.uploadImage(imageFile).toPromise();
-      
       this.newProduct.image = imageUrl;
 
       await this.productService.addProduct(this.newProduct);
@@ -52,35 +55,43 @@ export class ListProductComponent implements OnInit {
     this.selectedProduct = { ...product };
     this.newProduct = { ...product };
     this.isAdding = false;
+    this.loadSubcategories(this.newProduct.category.main);
+    this.loadSubSubcategories(this.newProduct.category.main, this.newProduct.category.subcategory);
   }
 
   async saveUpdatedProduct(): Promise<void> {
     try {
+      let updatedProduct: Product;
+
       if (!this.isAdding && this.selectedProduct) {
-        let updatedProduct: Product;
-        
-        if (this.newProduct.image === '') {
+        if (this.newProduct.image === '' || this.newProduct.image === this.selectedProduct.image) {
           updatedProduct = { ...this.selectedProduct, ...this.newProduct, image: this.selectedProduct.image };
+          await this.productService.updateProduct(updatedProduct);
+          console.log('Produit mis à jour avec succès');
         } else {
           const imageFile = (document.getElementById('imageInput') as HTMLInputElement).files[0];
           const imageUrl = await this.productService.uploadImage(imageFile).toPromise();
           updatedProduct = { ...this.selectedProduct, ...this.newProduct, image: imageUrl };
+          await this.productService.updateProduct(updatedProduct);
+          console.log('Produit mis à jour avec succès');
         }
-  
-        await this.productService.updateProduct(updatedProduct);
-        console.log('Produit mis à jour avec succès');
       } else {
-        await this.addProduct(); // Ajoutez cette ligne pour appeler la méthode addProduct() lorsque vous ajoutez un nouveau produit
-        console.log('Produit ajouté avec succès');
+        console.error('Aucun produit sélectionné pour la mise à jour');
       }
-  
+
       this.newProduct = { name: '', description: '', shortDescription: '', image: '', category: { main: '', subcategory: '', subSubcategory: '' }, price: 0 };
       this.selectedProduct = null;
       this.isAdding = true;
     } catch (error) {
-      console.error('Erreur lors de la mise à jour ou de l\'ajout du produit :', error);
+      console.error('Erreur lors de la mise à jour du produit :', error);
     }
   }
-  
 
+  loadSubcategories(category: string): void {
+    this.subcategories$ = this.productService.getDistinctSubcategories(category);
+  }
+
+  loadSubSubcategories(category: string, subcategory: string): void {
+    this.subSubcategories$ = this.productService.getDistinctSubSubcategories(category, subcategory);
+  }
 }

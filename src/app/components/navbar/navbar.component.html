@@ -1,74 +1,68 @@
-
 <!-- Navbar -->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fae3e9bd;">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="https://www.shutterstock.com/image-vector/makeup-beauty-logo-260nw-701503000.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-    </a>
-      <!-- Toggle button -->
-      <button class="navbar-toggler" type="button" (click)="toggleDropdown()">
-          <i class="fas fa-bars"></i>
-      </button>
-
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse justify-content-center" [class.show]="isDropdownOpen">
-          <!-- Left links -->
-          <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/dashboard">Accueil</a>
-              </li>
-              <li class="nav-item mx-3">
-                  <a class="nav-link" href="/about">A Propos</a>
-              </li>
-              
-              <!-- Navbar dropdown -->
-              <li class="nav-item mx-2" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
-                <a class="nav-link dropdown-toggle" href="/product" id="navbarDropdown" role="button" aria-expanded="false">
-                  Produits
-                </a>
-                <!-- Dropdown menu -->
-               <!-- Dropdown menu -->
-<ul class="dropdown-menu" [class.show]="isDropdownOpen">
-  <li *ngFor="let category of categories">
-    <a class="dropdown-item" (mouseenter)="getSubcategories(category)"(click)="navigateToCategory(category)">
-      {{ category }}
-    </a>
-    <ul *ngIf="category === activeCategory">
-      <li *ngFor="let subcategory of subcategories">
-        <a class="dropdown-item" (mouseenter)="getSubSubcategories(subcategory)" (click)="navigateToSubcategory(category, subcategory)">
-          {{ subcategory }}
+        <a class="navbar-brand" href="#">
+            <img src="https://www.shutterstock.com/image-vector/makeup-beauty-logo-260nw-701503000.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
         </a>
-        <ul *ngIf="subcategory === activeSubcategory">
-          <li *ngFor="let subSubcategory of subSubcategories">
-            <a class="dropdown-item" (click)="navigateToSubSubcategory(category, subcategory, subSubcategory)">
-              {{ subSubcategory }}
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-              </li>
-              
-              
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="/contact">Contact</a>
-            </li>
-              <li class="nav-item">
-                <a href="/cart" class="nav-link text-decoration-none text-bold">
-                  <i class="fas fa-shopping-cart mx-2"></i>
-                    <span class="badge rounded-pill bg-light text-black">{{ cartItems.length }}</span>
-                </a>
-            </li>
-            
-          </ul>
-          <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-  </div>
-  <!-- Container wrapper -->
-</nav>
-
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fas fa-bars"></i>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Accueil</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="/about">À Propos</a>
+                </li>
+  
+                <!-- Mega Menu -->
+                <li class="nav-item dropdown mega-menu">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button">
+                        Produits
+                    </a>
+                    <div class="dropdown-menu mega-menu-content" aria-labelledby="navbarDropdown">
+                        <!-- Catégories -->
+                        <div class="category">
+                            <div class="dropdown-item-title">Catégories</div>
+                            <ng-container *ngFor="let category of categories">
+                                <a  class="text-black text-decoration-none" (mouseenter)="getSubcategories(category)" (click)="navigateToCategory(category)">{{ category }}</a>
+                            </ng-container>
+                        </div>
+                        <!-- Sous-catégories -->
+                        <div class="subcategory">
+                            <div class="dropdown-item-title">Sous-catégories</div>
+                            <ng-container *ngFor="let subcategory of subcategories">
+                                <a  class="text-black text-decoration-none" (mouseenter)="getSubSubcategories(subcategory)" (click)="navigateToSubcategory(activeCategory, subcategory)">{{ subcategory }}</a>
+                            </ng-container>
+                        </div>
+                        <!-- Sous-sous-catégories -->
+                        <div class="subsubcategory">
+                            <div class="dropdown-item-title">Sous-sous-catégories</div>
+                            <ng-container *ngFor="let subSubcategory of subSubcategories">
+                              <a class="text-black text-decoration-none" (click)="navigateToSubSubcategory(activeCategory, activeSubcategory, subSubcategory)">{{ subSubcategory }}</a>
+                          </ng-container>
+                          
+                        </div>
+                    </div>
+                </li>
+                <!-- Fin du Mega Menu -->
+  
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cart" class="nav-link text-decoration-none text-bold">
+                        <i class="fas fa-shopping-cart mx-2"></i>
+                        <span class="badge rounded-pill bg-light text-black">{{ cartItems.length }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link" (click)="logout()">Déconnexion</a>
+        </li>
+    </div>
+  </nav>
+  

@@ -1,0 +1,120 @@
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Beauty Glow</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <button class="nav-link text-white bg-red px-3 rounded">Sign out</button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-red text-white sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column mx-auto" style="width: 90%;">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="admin/dash">
+                <span data-feather="admin/dash" class="align-text-bottom"></span>
+                Tableau de bord
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="list-message">
+                <span data-feather="file" class="align-text-bottom"></span>
+                Messages 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="admin/product">
+                <span data-feather="shopping-cart " class="align-text-bottom"></span>
+                Produits
+              </a>
+            </li>
+            <li class="nav-item">
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main content -->
+      <!-- Main content -->
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Messages de Contact</h1>
+  </div>
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header container">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+      
+      <!-- [ Main Content ] start -->
+      <div class="col-xl-12">
+        <div class="container p-3 my-3 border cont">
+          <div class="form-group mb-4">
+            <div class="card-header col-lg-12">
+              <h1 class="text-center text">Liste des Messages de Contact</h1>
+            </div>
+            <input id="exampleFormControlInput2" type="text" placeholder="Chercher...?"
+                   class="form-control form-control-underlined">
+          </div>
+          <br>
+          
+          <!-- table section -->
+          <table class="table align-middle mb-0 text-center table-responsive-lg" style="overflow-x:auto;">
+            <thead class="bg contour border text-bold">
+              <tr>
+                <th  class="text-black">Nom</th>
+                <th  class="text-black">Email</th>
+                <th  class="text-black">Téléphone</th>
+                <th class="text-black">Message</th>
+                <th  class="text-black">Statut</th>
+                <th class="text-black">Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let message of messages">
+              <tr>
+                <td><p class="fw-normal mb-1">{{ message.name }}</p></td>
+                <td>
+                    <a [href]="'mailto:' + message.email" class="fw-normal text-black mb-1">{{ message.email }}</a>
+                  </td>                <td><p class="fw-normal mb-1">{{ message.phone }}</p></td>
+                <td><p class="fw-normal mb-1">{{ message.message }}</p></td>
+                <td><p class="fw-normal mb-1">{{ message.processed ? 'Traité' : 'Non traité' }}</p></td>
+                <td>
+                  <ng-container *ngIf="!message.processed">
+                    <button (click)="markAsProcessed(message.id)" class="btn btn-danger-custom btn-sm btn-rounded ">
+                         <i class="fas fa-undo-alt"></i> 
+                    </button>
+                  </ng-container>
+                  <ng-container *ngIf="message.processed">
+                    <button (click)="markAsUnprocessed(message.id)" class="btn btn-success-custom btn-sm btn-rounded">
+                        <i class="fas fa-check-circle"></i>         </button>
+                  </ng-container>
+                  <button type="button" class="btn btn-danger btn-sm btn-rounded mx-2" title="Supprimer" (click)="deleteMessage(message.id)">
+                    <i class="fa fa-trash icon"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                         showFirstLastButtons
+                         aria-label="Sélectionner une page des éléments périodiques">
+          </mat-paginator>
+        </div>
+      </div>
+      <!-- [ Main Content ] end -->
+    </div>
+  </section>
+  

@@ -1,61 +1,90 @@
-/* Navbar */
-.navbar {
-    background-color: #f38db6; /* Background color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-  }
-  
-  .navbar-toggler {
-    border: none; /* Remove border */
-    background-color: transparent; /* Transparent background */
-    color: #333; /* Button color */
+/* Dropdown */
+.dropdown-menu.mega-menu-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Aligner sous le lien */
+  left: 0;
+  width: 90vw; /* Réduire la largeur du mega menu */
+  max-width: 800px; /* Ajouter une largeur maximale pour éviter que le menu ne devienne trop large sur les grands écrans */
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
-  }
-  
-  .nav-link {
-    color: #333; /* Link color */
-  }
-  
-  .nav-link.active {
-    font-weight: bold; /* Bold font for active link */
-  }
-  
-  
-  .dropdown-menu {
-    display: none; /* Initially hide dropdown menu */
-    position: absolute;
-    background-color: #ffffff; /* Dropdown background color */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dropdown box shadow */
-    z-index: 1000; /* Ensure dropdown appears above other elements */
-  }
-  
-  .dropdown-menu.show {
-    display: block; /* Show dropdown menu when active */
-  }
-  
-  .dropdown-item {
-    color: #333; /* Dropdown item color */
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f0f0f0; /* Background color on hover */
-  }
-  .input-group {
-    position: relative;
-  }
-  
-  .input-group input {
-    border-radius: 25px !important; /* Adjust border-radius as needed */
-  }
-  
-  .input-group button {
-    border-radius: 25px !important; /* Adjust border-radius as needed */
-    background-color: #fa8ed0; /* Change button background color */
-    border-color: #f38cf3; /* Change button border color */
-    color: #fff; /* Change button text color */
-  }
-  
-  .input-group button:hover {
-    background-color: #f38cf3; /* Change button background color on hover */
-    border-color: #f38cf3; /* Change button border color on hover */
-  }
-  
+/* Afficher le mega menu au survol */
+.nav-item.dropdown.mega-menu:hover .dropdown-menu.mega-menu-content {
+  display: block;
+}
+
+/* Cacher le mega menu quand le curseur quitte */
+.nav-item.dropdown.mega-menu:not(:hover) .dropdown-menu.mega-menu-content {
+  display: none;
+}
+
+/* Contenu du mega menu */
+.mega-menu-content {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Styles des catégories */
+.category {
+  flex-basis: 100%;
+  margin-bottom: 20px;
+}
+
+/* Titres des catégories */
+.dropdown-item-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Styles des sous-catégories */
+.subcategory {
+  flex-basis: calc(33.33% - 20px); /* Réglez la largeur des sous-catégories selon votre préférence */
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+/* Titres des sous-catégories */
+.subcategory .dropdown-item-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Styles des sous-sous-catégories */
+.subsubcategory {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+/* Titres des sous-sous-catégories */
+.subsubcategory .dropdown-item-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #777;
+}
+
+/* Liens des catégories, sous-catégories et sous-sous-catégories */
+.category a,
+.subcategory a,
+.subcategory {
+    flex-basis: calc(33.33% - 20px); /* Réglez la largeur des sous-catégories selon votre préférence */
+    margin-bottom: 20px;
+    padding: 0 10px;
+    position: relative; /* Ajoutez une position relative */
+    z-index: 2; /* Augmentez le z-index pour que les sous-catégories s'affichent au-dessus des catégories */
+}
+
+/* Styles des sous-sous-catégories */
+.subsubcategory {
+    margin-bottom: 10px;
+    padding: 0 10px;
+    position: relative; /* Ajoutez une position relative */
+    z-index: 3; /* Augmentez le z-index pour que les sous-sous-catégories s'affichent au-dessus des sous-catégories */
+}

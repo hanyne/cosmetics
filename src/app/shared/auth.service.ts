@@ -13,27 +13,36 @@ export class AuthService {
   constructor(private fireauth: AngularFireAuth, private firestore: AngularFirestore, private router: Router) { }
 
   // login method
-  login(email : string, password : string) {
-    this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
-        localStorage.setItem('token','true');
-
-        if(res.user?.emailVerified == true) {
-          this.router.navigate(['dashboard']);
+  login(email: string, password: string) {
+    this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
+      localStorage.setItem('token', 'true');
+  
+      // Vérifier dans quelle collection l'utilisateur se trouve
+      this.firestore.collection('Users').doc(res.user?.uid).get().subscribe(userDoc => {
+        if (userDoc.exists) {
+          // Utilisateur trouvé dans la collection "Users"
+          this.router.navigate(['admin/dash']);
         } else {
+          // Utilisateur trouvé dans la collection "clients"
           this.router.navigate(['dashboard']);
         }
-
+      }, err => {
+        console.error(err);
+        alert('Erreur lors de la vérification du type d\'utilisateur');
+      });
+  
     }, err => {
-        alert(err.message);
-        this.router.navigate(['/login']);
-    })
+      alert(err.message);
+      this.router.navigate(['/login']);
+    });
   }
+  
 
 
   register(user: User) {
     this.fireauth.createUserWithEmailAndPassword(user.email, user.password).then(res => {
       // Enregistrement dans Firestore
-      this.firestore.collection('Users').doc(res.user?.uid).set({
+      this.firestore.collection('clients').doc(res.user?.uid).set({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email
@@ -52,13 +61,11 @@ export class AuthService {
   }
 
   // sign out
-  logout() {
-    this.fireauth.signOut().then( () => {
+  logout(): Promise<void> {
+    return this.fireauth.signOut().then(() => {
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
-    }, err => {
-      alert(err.message);
-    })
+    });
   }
 
   // forgot password
@@ -91,5 +98,9 @@ export class AuthService {
       alert(err.message);
     })
   }
+  isLoggedIn(): boolean {
+    return !!this.fireauth.currentUser; // Vérifie si l'utilisateur actuel existe (c'est-à-dire s'il est connecté)
+  }
+ 
 
 }
