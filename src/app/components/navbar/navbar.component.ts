@@ -63,9 +63,7 @@ export class NavbarComponent implements OnInit {
   navigateToSubSubcategory(category: string, subcategory: string, subSubcategory: string) {
     this.router.navigate(['/category', category, subcategory, subSubcategory]);
   }
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn(); // Appeler la méthode du service d'authentification pour vérifier l'état de connexion de l'utilisateur
-  }
+
   logout() {
     this.authService.logout().then(() => {
       this.router.navigate(['/login']);

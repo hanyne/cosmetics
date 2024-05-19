@@ -98,9 +98,7 @@ export class AuthService {
       alert(err.message);
     })
   }
-  isLoggedIn(): boolean {
-    return !!this.fireauth.currentUser; // Vérifie si l'utilisateur actuel existe (c'est-à-dire s'il est connecté)
-  }
+ 
  
 
 }

@@ -58,11 +58,12 @@
                         <span class="badge rounded-pill bg-light text-black">{{ cartItems.length }}</span>
                     </a>
                 </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link"  (click)="logout()">logout</a>
+                </li>
             </ul>
         </div>
-        <li class="nav-item" *ngIf="isLoggedIn()">
-            <a class="nav-link" (click)="logout()">Déconnexion</a>
-        </li>
+       
     </div>
   </nav>
   
