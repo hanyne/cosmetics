@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit {
       .then(() => {
         // Effacez le panier après la commande
         this.cartService.clearCart();
-        this.router.navigate(['/cart']);
+        window.alert('Commande enregistré avec succès');
       })
       .catch(error => {
         console.error('Error placing order:', error);
