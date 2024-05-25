@@ -35,19 +35,24 @@ export class CheckoutComponent implements OnInit {
       deliveryCharge: 7, // Ajoutez des frais de livraison si nécessaire
       total: this.getTotalPrice() // Utiliser la méthode pour calculer le prix total
     };
-
+  
     this.orderService.placeOrder(order)
       .then(() => {
         // Effacez le panier après la commande
         this.cartService.clearCart();
-        window.alert('Commande enregistré avec succès');
+        window.alert('Commande enregistrée avec succès');
+  
+        // Attendre 2 secondes avant de rediriger
+        setTimeout(() => {
+          this.router.navigate(['/cart']);
+        }, 2000); // 2000 millisecondes = 2 secondes
       })
       .catch(error => {
         console.error('Error placing order:', error);
         // Gérez l'erreur, affichez un message à l'utilisateur, etc.
       });
-      
   }
+  
 
   getTotalPrice(): number {
     return this.cartItems.reduce((total, item) => {
